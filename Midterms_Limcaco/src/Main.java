@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -13,19 +12,15 @@ public class Main {
 
         //There should be 3 stacks (Player Hand, Player Deck, & Discard Pile)
         //The player deck, player hand, and discarded pile should work as a STACK. The next card to be drawn must be the top of the deck.
-        CardStack deck = new CardStack(30); // Player deck
-
-
-        CardStack discardedPile = new CardStack(30); // Discard pile
-
-
-        ArrayList<Card> hand = new ArrayList<>(); // Player's hand
+        CardStack deck = new CardStack(30); //player deck
+        CardStack hand = new CardStack(30); // hand
+        CardStack discardedPile = new CardStack(30); //discard
 
 
 
         // Contains 30 cards
         for (int i = 1; i <= 30; i++) {
-            deck.push(new Card("Card " + i));
+            deck.push(new Card("Card " + i)); //push function
         }
 
 
@@ -49,6 +44,7 @@ public class Main {
             int amount = random.nextInt(5) + 1;
 
 
+            //draw cards
             if (command == 0) {
 
                 System.out.println("COMMAND: Draw " + amount + " card(s)");
@@ -60,10 +56,10 @@ public class Main {
                         break;
                     }
 
-                    Card card = deck.pop();
-                    hand.add(card);
-
-                    System.out.println("You Drew: " + card);
+                    System.out.println("Next card: " + deck.peek());  // peek() used
+                    Card card = deck.pop(); // pop() used
+                    hand.push(card); // push() used
+                    System.out.println("You drew: " + card);
                 }
             }
 
@@ -80,11 +76,12 @@ public class Main {
                         break;
                     }
 
-                    // card from removal from hand
-                    Card card = hand.remove(hand.size() - 1);
+                    System.out.println("Card to discard: " + hand.peek());
+
+                    Card card = hand.pop();
                     discardedPile.push(card);
 
-                    System.out.println("Discarded cards: " + card);
+                    System.out.println("Discarded: " + card);
                 }
             }
 
@@ -102,10 +99,12 @@ public class Main {
                         break;
                     }
 
-                    Card card = discardedPile.pop();
-                    hand.add(card);
+                    System.out.println("Card to retrieve: " + discardedPile.peek());
 
-                    System.out.println("Retrieved Cards: " + card);
+                    Card card = discardedPile.pop();
+                    hand.push(card);
+
+                    System.out.println("Retrieved: " + card);
                 }
             }
 
@@ -118,28 +117,30 @@ public class Main {
             System.out.println("================");
 
             System.out.println("\n Cards in hand:");
+            hand.printStack();
 
-            if (hand.isEmpty()) {
-                System.out.println("No cards left");
-            } else {
-                for (Card card : hand) {
-                    System.out.println("- " + card);
-                }
-            }
+            System.out.println(
+                    "\nCards remaining in deck: " + deck.size()
+            );
 
-            System.out.println("\n Cards remaining in deck: " + deck.size());
-
-            System.out.println("Cards in discarded pile: " + discardedPile.size());
-
+            System.out.println(
+                    "Cards in discarded pile: " + discardedPile.size()
+            );
 
             if (deck.isEmpty()) {
+                System.out.println("\n====================");
                 System.out.println("\nGAME OVER!");
+                System.out.println("====================");
                 System.out.println("The player deck is empty.");
+                System.out.println("Final cards in hand: " + hand.size());
+                System.out.println("Final cards discard pile: " + discardedPile.size());
+
                 break;
             }
 
             //To proceed to next turn, player needs to press Enter
             System.out.println("\n Press ENTER to continue...");
+            System.out.println("\n ===================NEW LINE====================");
             scanner.nextLine();
         }
 

@@ -53,7 +53,7 @@ public class CardStack {
     }
 
     public void printStack() {
-        System.out.println("Print stack... ");
+        System.out.println("Showing current cards... ");
 
         for (int i = top; i >= 0; i--) {
             System.out.println(stack[i]);
