@@ -1,10 +1,12 @@
 import java.util.EmptyStackException;
+//You can only use a Stack with an array-backed data structure based on the ArrayStack
+// implementation that we wrote in class. Not following this instruction will VOID your submission.
 
-public class ArrayStack {
+public class CardStack {
     private Card[] stack;
     private int top;
 
-    public ArrayStack(int capacity) {
+    public CardStack(int capacity) {
         stack = new Card[capacity];
         top = -1;
     }

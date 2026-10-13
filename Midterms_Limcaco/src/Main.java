@@ -4,19 +4,23 @@ import java.util.Scanner;
 
 public class Main {
 
+
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in); //input checker
         Random random = new Random();
 
 
-        ArrayStack deck = new ArrayStack(30); // Player deck
+        //There should be 3 stacks (Player Hand, Player Deck, & Discard Pile)
+        //The player deck, player hand, and discarded pile should work as a STACK. The next card to be drawn must be the top of the deck.
+        CardStack deck = new CardStack(30); // Player deck
 
 
-        ArrayStack discardedPile = new ArrayStack(30); // Discard pile
+        CardStack discardedPile = new CardStack(30); // Discard pile
 
 
         ArrayList<Card> hand = new ArrayList<>(); // Player's hand
+
 
 
         // Contains 30 cards
@@ -30,9 +34,9 @@ public class Main {
         //- Get x cards from the discarded pile
 
         //loop
-        boolean gameRunning = true;
 
-        while (gameRunning) {
+        //The program ends when the player deck is emptied.
+        while (!deck.isEmpty()) {
 
             System.out.println("\n====================");
             System.out.println("    Game Start");
@@ -128,9 +132,9 @@ public class Main {
             System.out.println("Cards in discarded pile: " + discardedPile.size());
 
 
-            if (deck.isEmpty() && hand.isEmpty() && discardedPile.isEmpty()) {
-                gameRunning = false;
-                System.out.println("\n No cards remaining!");
+            if (deck.isEmpty()) {
+                System.out.println("\nGAME OVER!");
+                System.out.println("The player deck is empty.");
                 break;
             }
 
